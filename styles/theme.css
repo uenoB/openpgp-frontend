@@ -1,0 +1,70 @@
+body {
+  font-family: 'Noto Sans', 'Helvetica Neue', sans-serif;
+  color: var(--openpgp-color-fg, #000);
+  background-color: var(--openpgp-color-bg, #fff);
+}
+
+a {
+  color: var(--openpgp-color-link, #44f);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+code {
+  font-family: 'Operator Mono', Menlo, Monaco, Consolas, monospace;
+  font-variant: none;
+  overflow-wrap: break-word;
+}
+
+table {
+  padding: 0;
+  margin: 1em 0;
+  border-collapse: collapse;
+  border: thin solid;
+  border-color: var(--openpgp-color-fg, #000);
+}
+
+th {
+  background-color: var(--openpgp-color-header, #bdf);
+}
+
+td,
+th {
+  padding: 0.25em 0.5em;
+  margin: 0;
+  border-color: var(--openpgp-color-fg, #000);
+  border-style: solid;
+  border-width: thin;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-size: 100%;
+  color: var(--openpgp-color-fg, #000);
+}
+
+button,
+input[type='submit'],
+input[type='file']::file-selector-button {
+  border: thin solid;
+  border-radius: 0.5em;
+}
+
+button:not(:disabled),
+input[type='submit']:not(:disabled),
+input[type='file']:not(:disabled)::file-selector-button {
+  background-color: var(--openpgp-color-button, #def);
+}
+
+button:not(:disabled):hover,
+input[type='submit']:not(:disabled):hover,
+input[type='file']:not(:disabled):hover::file-selector-button {
+  background-color: var(--openpgp-color-flash, #2df);
+}
+
+button:not(:disabled):active,
+input[type='submit']:not(:disabled):active,
+input[type='file']:not(:disabled):active::file-selector-button {
+  background-color: var(--openpgp-color-pressed, #0bd);
+}

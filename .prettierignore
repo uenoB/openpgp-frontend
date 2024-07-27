@@ -1,0 +1,5 @@
+*.md
+dist/
+/pages/_site/
+pnpm-lock.yaml
+package-lock.json

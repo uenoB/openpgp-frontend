@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "openpgp-frontend-lib",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {},
+  "dependencies": {
+    "openpgp": "^5.11.2"
+  }
+}

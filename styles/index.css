@@ -1,0 +1,247 @@
+.openpgp-app {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.openpgp-app input:is([type='text'], [type='password']) {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.openpgp-app form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.openpgp-app th {
+  white-space: nowrap;
+}
+
+.openpgp-app .openpgp-button-export-key,
+.openpgp-app .openpgp-button-close,
+.openpgp-app .openpgp-button-bookmark {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0.1em;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.openpgp-app .openpgp-button-export-key,
+.openpgp-app .openpgp-button-close {
+  width: 1.6em;
+}
+
+.openpgp-app .openpgp-drag-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  background-color: var(--openpgp-color-overlay, rgb(255 255 255 / 70%));
+}
+
+.openpgp-app .openpgp-drag-overlay > div {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 1em; /* 2em * 1 = 2rem */
+  font-size: 2em;
+  text-align: center;
+  border: 0.25em dashed var(--openpgp-color-fg, #000); /* 2em * .25 = .5rem */
+  border-radius: 2em; /* 2em * 2 = 4rem */
+}
+
+.openpgp-app .openpgp-left-column {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+}
+
+.openpgp-app .openpgp-result-list {
+  flex: 1;
+  min-width: 8em;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  border-left: thin dashed var(--openpgp-color-fg, #000);
+}
+
+.openpgp-app .openpgp-menu {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  line-height: 1;
+  border-bottom: thin dashed var(--openpgp-color-fg, #000);
+}
+
+.openpgp-app .openpgp-menu ul {
+  padding: 0.2em 0;
+  margin: 0;
+}
+
+.openpgp-app .openpgp-menu li {
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 0 1em;
+}
+
+.openpgp-app .openpgp-menu a {
+  display: inline-block;
+  padding: 0.2em;
+  margin: 0;
+  border-radius: 0.2em;
+}
+
+.openpgp-app .openpgp-column-wide {
+  width: 100%;
+}
+
+.openpgp-app .openpgp-main {
+  padding: 0 1em;
+  margin: 0;
+  overflow: auto;
+}
+
+.openpgp-app .openpgp-page-title {
+  font-size: 1.414em;
+  font-weight: bold;
+}
+
+.openpgp-app .openpgp-userid-email {
+  font-size: 0.75em;
+  white-space: nowrap;
+}
+
+.openpgp-app .openpgp-userid-email::before {
+  content: '<';
+}
+
+.openpgp-app .openpgp-userid-email::after {
+  content: '>';
+}
+
+.openpgp-app .openpgp-key-fingerprint {
+  font-size: 0.75em;
+}
+
+.openpgp-app .openpgp-key-fingerprint strong {
+  font-size: 1.33em;
+}
+
+.openpgp-app .openpgp-key-fingerprint s {
+  color: var(--openpgp-color-diminished, #888);
+  text-decoration: line-through var(--openpgp-color-fg, #000) 1px;
+}
+
+.openpgp-app .openpgp-result-list p {
+  margin: 0.9em 0;
+}
+
+.openpgp-app .openpgp-result-list li {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  min-height: 4em;
+  padding: 0.1em 0.6em 0.1em 2em;
+  margin: 0;
+  overflow-x: auto;
+  border-bottom: thin dashed var(--openpgp-color-fg, #000);
+}
+
+.openpgp-app .openpgp-result-list .openpgp-button-close {
+  position: absolute;
+  top: 0.2em;
+  left: 0.2em;
+  z-index: 1;
+}
+
+.openpgp-app .openpgp-result-list .openpgp-download-kind {
+  position: absolute;
+  top: 0.266em;
+  left: 2.666em;
+  font-size: 0.75em;
+}
+
+.openpgp-app .openpgp-result-list .openpgp-result-done {
+  padding: 0;
+}
+
+.openpgp-app .openpgp-result-done > a {
+  box-sizing: border-box;
+  display: block;
+  min-height: 4em;
+  padding: 1.2em 0.6em 1em 2em;
+  margin: 0;
+  overflow-x: auto;
+}
+
+.openpgp-app .openpgp-result-list .openpgp-result-info {
+  background-color: var(--openpgp-color-box, #eff);
+}
+
+.openpgp-app .openpgp-result-list .openpgp-result-error {
+  font-weight: bold;
+  color: var(--openpgp-color-error, #f00);
+  background-color: var(--openpgp-color-box, #eff);
+}
+
+.openpgp-app .openpgp-new-item {
+  animation: openpgp-new-item 1 1s ease-in;
+}
+
+@keyframes openpgp-new-item {
+  from {
+    background-color: var(--openpgp-color-flash, #2df);
+  }
+}
+
+.openpgp-app .openpgp-wait {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  padding: 2px;
+  border: 2px solid var(--openpgp-color-fg, #000);
+  border-radius: 8px;
+}
+
+.openpgp-app .openpgp-wait::before {
+  position: absolute;
+  inset: 2px;
+  content: '';
+  background-image: linear-gradient(
+    -45deg,
+    var(--openpgp-color-candy1, #0bd) 25%,
+    var(--openpgp-color-candy2, #2df) 25%,
+    var(--openpgp-color-candy2, #2df) 50%,
+    var(--openpgp-color-candy1, #0bd) 50%,
+    var(--openpgp-color-candy1, #0bd) 75%,
+    var(--openpgp-color-candy2, #2df) 75%
+  );
+  background-size: 2em 2em;
+  border-radius: 6px;
+  animation: openpgp-wait-roll 0.8s infinite linear;
+}
+
+@keyframes openpgp-wait-roll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 2em 2em;
+  }
+}

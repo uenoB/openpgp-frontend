@@ -1,0 +1,75 @@
+{
+  "name": "openpgp-frontend-solid",
+  "version": "0.1.0",
+  "description": "An OpenPGP frontend using Solid.js",
+  "homepage": "https://github.com/uenoB/openpgp-frontend#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uenoB/openpgp-frontend.git",
+    "directory": "solid"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "dev": "vite"
+  },
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.min.d.ts",
+      "import": "./dist/index.min.js"
+    },
+    "./dist/index.js": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./dist/index.jsx": {
+      "types": "./dist/index.d.tsx",
+      "import": "./dist/index.jsx"
+    },
+    "./dist/index.min.jsx": {
+      "types": "./dist/index.min.d.tsx",
+      "import": "./dist/index.min.jsx"
+    },
+    "./dist/index.css": "./dist/index.css",
+    "./dist/index.min.css": "./dist/index.min.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/index.css",
+    "dist/index.css.map",
+    "dist/index.d.min.ts",
+    "dist/index.d.min.tsx",
+    "dist/index.d.ts",
+    "dist/index.d.tsx",
+    "dist/index.js",
+    "dist/index.js.map",
+    "dist/index.jsx",
+    "dist/index.jsx.map",
+    "dist/index.min.css",
+    "dist/index.min.css.map",
+    "dist/index.min.js",
+    "dist/index.min.js.map",
+    "dist/index.min.jsx",
+    "dist/index.min.jsx.map"
+  ],
+  "keywords": [
+    "openpgp",
+    "pgp",
+    "solid",
+    "solid-js"
+  ],
+  "dependencies": {
+    "openpgp": "^5.11.2",
+    "solid-js": "^1.8.19"
+  },
+  "devDependencies": {
+    "vite": "^5.3.5",
+    "vite-plugin-solid": "^2.10.2"
+  }
+}
