@@ -189,6 +189,13 @@ const buildIndexMinDts = dir => {
   }
 }
 
+const copyLicense = dir => {
+  const input = 'LICENSE'
+  const output = path.join(dir, 'LICENSE')
+  console.log(`creating ${output}`)
+  fs.copyFileSync(input, output)
+}
+
 const esmOutput = dir => ({
   banner: banner(dir),
   format: 'es',
@@ -223,7 +230,8 @@ const rollupConfigDts = dir => ({
     closeBundlePlugin(
       [buildIndexMinDts, dir],
       [buildIndexCss, dir],
-      [buildIndexMinCss, dir]
+      [buildIndexMinCss, dir],
+      [copyLicense, dir]
     )
   ]
 })
