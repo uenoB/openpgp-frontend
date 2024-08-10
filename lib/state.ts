@@ -135,29 +135,34 @@ export class State<Component> {
     this.#hash.set(hash)
   }
 
-  async #gotoMode(
-    mode: Mode | ((keyring: PublicKeys) => Awaitable<PublicKeys>),
+  #gotoNewKey(replace: boolean | undefined): void {
+    this.#save('#.', replace)
+    this.#mode.set('#.')
+    this.setProcessor(undefined)
+  }
+
+  async #gotoPublicKeys(
+    mode: (keyring: PublicKeys) => Awaitable<PublicKeys>,
     replace: boolean | undefined
   ): Promise<void> {
-    if (typeof mode === 'function') {
-      this.#mode.set(undefined)
-      this.setProcessor(undefined)
-      await this.#updateKeyring(async old => {
-        const newKeyring = await mode(old)
-        this.#save(keyToHash(newKeyring), replace)
-        this.setProcessor(newKeyring)
-        return newKeyring
-      })
-    } else if (typeof mode === 'object') {
-      this.#save(keyToHash(mode), replace)
-      this.#mode.set(mode)
-      this.setProcessor(mode)
-      await this.#updateKeyring(async old => await old.importKeys([mode]))
-    } else {
-      this.#save(mode ?? '#', replace)
-      this.#mode.set(mode)
-      this.setProcessor(undefined)
-    }
+    this.#mode.set(undefined)
+    this.setProcessor(undefined)
+    await this.#updateKeyring(async old => {
+      const newKeyring = await mode(old)
+      this.#save(keyToHash(newKeyring), replace)
+      this.setProcessor(newKeyring)
+      return newKeyring
+    })
+  }
+
+  async #gotoPrivateKey(
+    mode: PrivateKey,
+    replace: boolean | undefined
+  ): Promise<void> {
+    this.#save(keyToHash(mode), replace)
+    this.#mode.set(mode)
+    this.setProcessor(mode)
+    await this.#updateKeyring(async old => await old.importKeys([mode]))
   }
 
   processHash(hash: string): void {
@@ -166,7 +171,7 @@ export class State<Component> {
     if (hash === '') {
       this.run([() => PublicKeys.empty], runOptions)
     } else if (hash === '#.') {
-      this.#gotoMode(hash, true).catch(this.fail.bind(this))
+      this.#gotoNewKey(true)
     } else if (hash.startsWith('#/')) {
       const task = fetchData(hash.slice(1)).then(async data => {
         this.run(await PublicKeys.empty.process(data), runOptions)
@@ -192,8 +197,10 @@ export class State<Component> {
     let result: Info<Component> | Done | undefined
     try {
       const output = await task
-      if (typeof output === 'function' || output instanceof PrivateKey) {
-        await this.#gotoMode(output, oldItem().replace)
+      if (typeof output === 'function') {
+        await this.#gotoPublicKeys(output, oldItem().replace)
+      } else if (output instanceof PrivateKey) {
+        await this.#gotoPrivateKey(output, oldItem().replace)
       } else if (output?.data != null) {
         const contentType = output.contentType ?? 'application/octet-stream'
         const data = new Blob(await readAll(output), { type: contentType })
