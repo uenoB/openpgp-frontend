@@ -1,6 +1,6 @@
 {
   "name": "openpgp-frontend-preact",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An OpenPGP frontend using Preact",
   "homepage": "https://github.com/uenoB/openpgp-frontend#readme",
   "repository": {
