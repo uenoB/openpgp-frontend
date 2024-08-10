@@ -6,8 +6,6 @@ export type Result = ResultTy<preact.ComponentType>
 
 export const state = new State<preact.ComponentType>()
 
-export const fail = state.fail.bind(state)
-
 export const useNotice = <X>(notice: Notice<X>): X => {
   const [value, setValue] = useState(notice.value)
   useEffect(() => {

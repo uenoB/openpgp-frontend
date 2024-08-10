@@ -17,7 +17,7 @@ const mainComponent = (): JSX.Element => {
 }
 
 const onHashChange = (): void => {
-  state.processHash(window.location.hash).catch(state.fail.bind(state))
+  state.processHash(window.location.hash)
 }
 
 export const App: VoidComponent = () => {

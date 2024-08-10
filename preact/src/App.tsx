@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/hooks'
 import { Droppable } from './Droppable'
-import { fail, state, useNotice } from './state'
+import { state, useNotice } from './state'
 import { Menu, about } from './Menu'
 import { Results } from './Results'
 import { NewKey } from './NewKey'
@@ -32,7 +32,7 @@ const Top: preact.FunctionComponent<{ children?: never }> = () => {
 }
 
 const onHashChange = (): void => {
-  state.processHash(window.location.hash).catch(fail)
+  state.processHash(window.location.hash)
 }
 
 export const App: preact.FunctionComponent<{ children?: never }> = () => {

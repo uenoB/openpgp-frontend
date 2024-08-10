@@ -160,22 +160,28 @@ export class State<Component> {
     }
   }
 
-  async processHash(hash: string): Promise<void> {
+  processHash(hash: string): void {
     const runOptions = { scroll: false, replace: true }
     this.#hash.set(hash)
     if (hash === '') {
       this.run([() => PublicKeys.empty], runOptions)
     } else if (hash === '#.') {
-      await this.#gotoMode(hash, true)
+      this.#gotoMode(hash, true).catch(this.fail.bind(this))
     } else if (hash.startsWith('#/')) {
-      const data = await fetchData(hash.slice(1))
-      const tasks = await PublicKeys.empty.process(data)
-      this.run(tasks, runOptions)
+      const task = fetchData(hash.slice(1)).then(async data => {
+        this.run(await PublicKeys.empty.process(data), runOptions)
+        return undefined
+      })
+      this.run([task], runOptions)
     } else if (hash.startsWith('#')) {
       const data = decodeBase64(hash.slice(1))
-      this.run(await PublicKeys.empty.process({ data }), runOptions)
+      const task = PublicKeys.empty.process({ data }).then(tasks => {
+        this.run(tasks, runOptions)
+        return undefined
+      })
+      this.run([task], runOptions)
     } else {
-      throw Error('hash does not start with a hash')
+      this.fail(Error('hash does not start with a hash'))
     }
   }
 
