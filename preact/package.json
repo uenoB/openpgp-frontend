@@ -64,11 +64,11 @@
     "preact"
   ],
   "dependencies": {
-    "openpgp": "^5.11.2",
-    "preact": "^10.23.1"
+    "openpgp": "^6.0.1",
+    "preact": "^10.25.4"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.9.0",
-    "vite": "^5.3.5"
+    "@preact/preset-vite": "^2.9.3",
+    "vite": "^6.0.7"
   }
 }

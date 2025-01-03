@@ -6,6 +6,6 @@
   "type": "module",
   "scripts": {},
   "dependencies": {
-    "openpgp": "^5.11.2"
+    "openpgp": "^6.0.1"
   }
 }
