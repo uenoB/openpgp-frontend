@@ -16,9 +16,9 @@ export const Form = <Key extends string>(props: {
 }): JSX.Element => {
   const [ready, setReady] = createSignal<boolean>(false)
   const [submitted, setSubmitted] = createSignal<boolean>(false)
-  let formRef: HTMLFormElement
+  let formRef: HTMLFormElement | undefined
   const inputElement = (key: Key): HTMLInputElement =>
-    formRef.elements.namedItem(key) as HTMLInputElement
+    formRef?.elements.namedItem(key) as HTMLInputElement
   const getFormData = (): Record<Key, string> => {
     const data: Partial<Record<Key, string>> = {}
     for (const { key } of props.fields) data[key] = inputElement(key).value
@@ -45,8 +45,7 @@ export const Form = <Key extends string>(props: {
   }
   onMount(onInput)
   return (
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    <form id={props.id} onSubmit={onSubmitForm} ref={formRef!}>
+    <form id={props.id} onSubmit={onSubmitForm} ref={formRef}>
       <table>
         <tbody>
           <For each={props.fields}>

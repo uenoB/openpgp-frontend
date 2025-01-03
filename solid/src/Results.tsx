@@ -48,18 +48,17 @@ export const Results: VoidComponent<{ class?: string | undefined }> = props => (
   <ul class={props.class}>
     <For each={Array.from(getResults())}>
       {item => {
-        let elem: HTMLLIElement
+        let elem: HTMLLIElement | undefined
         onMount(() => {
           const scroll = item.scroll ?? true
           if (!scroll) return
           window.requestAnimationFrame(() => {
-            elem.scrollIntoView({ block: 'end', behavior: 'smooth' })
+            elem?.scrollIntoView({ block: 'end', behavior: 'smooth' })
           })
         })
         if (item.result == null) {
           return (
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            <li class="openpgp-result-runnning" ref={elem!}>
+            <li class="openpgp-result-runnning" ref={elem}>
               <p>
                 <span class="openpgp-wait">processing...</span>
               </p>
@@ -67,8 +66,7 @@ export const Results: VoidComponent<{ class?: string | undefined }> = props => (
           )
         } else if (item.result.data != null) {
           return (
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            <li class="openpgp-new-item openpgp-result-done" ref={elem!}>
+            <li class="openpgp-new-item openpgp-result-done" ref={elem}>
               <CloseButton item={item} />
               <Download done={item.result} />
             </li>
@@ -80,8 +78,7 @@ export const Results: VoidComponent<{ class?: string | undefined }> = props => (
             'openpgp-new-item': true
           }
           return (
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            <li classList={classList} ref={elem!}>
+            <li classList={classList} ref={elem}>
               <CloseButton item={item} />
               {infoToHTML(item.result.info)}
             </li>
