@@ -16,7 +16,7 @@ export abstract class Key {
   declare readonly info?: never // distinct from Info
   abstract readonly features: FeaturesChecked
   abstract serialize(): Uint8Array[]
-  abstract armor(privateKey?: boolean | undefined): Data
+  abstract armor(privateKey?: boolean): Data
 }
 
 export abstract class SingleKey extends Key {

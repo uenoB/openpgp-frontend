@@ -229,7 +229,7 @@ export class State<Component> {
 
   run(
     tasks: Iterable<Awaitable<Task<Component>>>,
-    options?: ResultCommon | undefined
+    options?: ResultCommon
   ): void {
     const newItems = Array.from(tasks, task => {
       const getItem = (): ResultWorking => item
