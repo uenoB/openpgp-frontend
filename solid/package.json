@@ -1,6 +1,6 @@
 {
   "name": "openpgp-frontend-solid",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An OpenPGP frontend using Solid.js",
   "homepage": "https://github.com/uenoB/openpgp-frontend#readme",
   "repository": {
