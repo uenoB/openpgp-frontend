@@ -65,11 +65,11 @@
     "solid-js"
   ],
   "dependencies": {
-    "openpgp": "^6.0.1",
-    "solid-js": "^1.9.3"
+    "openpgp": "^6.1.0",
+    "solid-js": "^1.9.5"
   },
   "devDependencies": {
-    "vite": "^6.0.7",
-    "vite-plugin-solid": "^2.11.0"
+    "vite": "^6.2.6",
+    "vite-plugin-solid": "^2.11.6"
   }
 }

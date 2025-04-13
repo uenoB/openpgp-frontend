@@ -23,15 +23,23 @@ export class PrivateKey extends SingleKey {
     return this.encryptedKey
   }
 
-  protected constructor(args: {
-    features: FeaturesChecked
-    primaryUser: openpgp.UserIDPacket | null
-    privateKey: openpgp.PrivateKey
-    encryptedKey?: openpgp.PrivateKey
-  }) {
+  protected constructor(
+    args: {
+      features: FeaturesChecked
+      primaryUser: openpgp.UserIDPacket | null
+      privateKey: openpgp.PrivateKey
+      encryptedKey?: openpgp.PrivateKey
+    },
+    args2?: {
+      privateKey?: openpgp.PrivateKey
+      encryptedKey?: openpgp.PrivateKey
+    }
+  ) {
     super(args)
-    this.privateKey = args.privateKey
-    this.encryptedKey = args.encryptedKey ?? args.privateKey
+    const privateKey = args2?.privateKey ?? args.privateKey
+    const encryptedKey = args2?.encryptedKey ?? args.encryptedKey
+    this.privateKey = privateKey
+    this.encryptedKey = encryptedKey ?? privateKey
   }
 
   static async from(key: openpgp.PrivateKey): Promise<PrivateKey> {
@@ -99,13 +107,13 @@ export class PrivateKey extends SingleKey {
   async decryptKey(passphrase: string): Promise<PrivateKey> {
     const privateKey = this.privateKey
     const decryptedKey = await openpgp.decryptKey({ privateKey, passphrase })
-    return new PrivateKey({ ...this, privateKey: decryptedKey })
+    return new PrivateKey(this, { privateKey: decryptedKey })
   }
 
   async encryptKey(passphrase: string): Promise<PrivateKey> {
     const privateKey = this.privateKey
     const encryptedKey = await openpgp.encryptKey({ privateKey, passphrase })
-    return new PrivateKey({ ...this, privateKey: encryptedKey, encryptedKey })
+    return new PrivateKey(this, { privateKey: encryptedKey, encryptedKey })
   }
 
   async createRevokeCert(): Promise<Data> {
